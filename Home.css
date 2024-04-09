@@ -1,0 +1,12 @@
+.c-item{
+    height: 600px;
+}
+
+.c-img {
+    height: 120%;
+    object-fit: cover;
+}
+.nav-item {
+    height: 1%;
+
+}

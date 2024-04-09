@@ -1,0 +1,8 @@
+.c-item{
+    height: 640px;
+}
+
+.c-img {
+    height: 120%;
+    object-fit: cover;
+}
