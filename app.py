@@ -5,7 +5,7 @@ from flask import Flask, redirect, url_for, request, render_template, session
 from functools import wraps
 
 app = Flask(__name__)
-app.config['SECRET_KEY'] = "RinaniRita"
+app.secret_key = "RinaniRita"
 
 
 @app.route('/')
