@@ -4,14 +4,14 @@ from mysql.connector import Error
 
 hostname = 'localhost'
 username = 'root'
-password = 'root'
-databasename = '`hotel-coursework`'
+password1 = 'trung13062005'
+databasename = 'hotel-coursework'
 
 def getConnection():
     try:
         conn = mysql.connector.connect(host=hostname,
                                        user = username,
-                                       password = password,
+                                       password = password1,
                                        database = databasename)
     except Error as err:
         print(err)
@@ -166,7 +166,7 @@ class User(Model):
             return False   
         else:    
             if self.dbcursor.rowcount == 0:
-                return False            
+                return False      
         return True
     
     def getById(self, id):
