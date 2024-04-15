@@ -36,8 +36,31 @@ def Terms_of_service():
 def login():
     return render_template('users/login.html')
 
-@app.route('/register')
+@app.route('/register',  methods=['POST', 'GET'])
 def register():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        uniqueFlag = True
+        usermodel = db.User()
+        user = dict();
+        user['username']= request.form['username']
+        if user['username']=='' or usermodel.getByUsername(user['username']):
+            uniqueFlag = False
+        
+        user['email'] = request.form['email']
+        if user['email']=='' or usermodel.getByEmail(user['email']):
+            uniqueFlag = False
+
+        if request.form['password']!='' and request.form['password']==request.form['repassword']:
+            user['password'] = request.form['password']
+        else:
+            user['password']=''
+        user['usertype'] = ''
+        if uniqueFlag and  user['password']!='':
+            usermodel = db.User()
+            if usermodel.addNew(user):
+                return redirect(url_for('index'))        
     return render_template('users/register.html')
 
 if __name__ == '__main__':
