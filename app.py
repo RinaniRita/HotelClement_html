@@ -1,5 +1,8 @@
-import sqlite3
+import mysql.connector, db
+from mysql.connector import Error
+from markupsafe import escape
 from flask import Flask, redirect, url_for, request, render_template, session
+from functools import wraps
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
@@ -80,26 +83,38 @@ def login():
 
     return render_template('users/login.html', form=form)
 
+
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-        email = request.form['email']
+        user = dict()
+        # username = request.form['username']
+        # password = request.form['password']
+        user['username']= request.form['username']
+        user['password'] = request.form['password']
+        user['email'] = request.form['email']
+        uniqueFlag = True
+        usermodel = db.User()
+        usermodel.addNew(user)
+        user['username']= request.form['username']
+        if user['username']=='' or usermodel.getByUsername(user['username']):
+            uniqueFlag = False
+        
+        user['email'] = request.form['email']
+        if user['email']=='' or usermodel.getByEmail(user['email']):
+            uniqueFlag = False
 
-        # Check if username already exists
-        existing_user = User.query.filter_by(username=username).first()
-        if existing_user:
-            return 'Username already exists. Please choose a different one.'
-
-        # Create a new user
-        new_user = User(username=username, password=generate_password_hash(password))
-        db.session.add(new_user)
-        db.session.commit()
-
-        return redirect(url_for('index'))
-
-    return render_template('users/register.html')
+        if request.form['password']!='' and request.form['password']==request.form['repassword']:
+            user['password'] = request.form['password']
+        else:
+            user['password']=''
+        user['usertype'] = ''
+        if uniqueFlag and  user['password']!='':
+            usermodel = db.User()
+            return user['password']
+        if usermodel.addNew(user):
+            return redirect(url_for('index'))        
+    return render_template('users/register.html') 
 
 if __name__ == '__main__':
     app.run(debug=True)
