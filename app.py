@@ -1,5 +1,4 @@
-import mysql.connector,db
-from db import *
+import mysql.connector, db
 from mysql.connector import Error
 from markupsafe import escape
 from flask import Flask, redirect, url_for, request, render_template, session
@@ -37,45 +36,9 @@ def Terms_of_service():
 def login():
     return render_template('users/login.html')
 
-@app.route('/register',   methods=['POST', 'GET'])
+@app.route('/register')
 def register():
-    if request.method == 'POST':
-        userame = request.form['username']
-        password = request.form['password']
-        uniqueFlag = True   
-        usermodel = db.User()
-        user = dict()
-        user['username']= request.form['username']
-        if user['username']=='' or usermodel.getByUsername(user['username']):
-            uniqueFlag = False
-        
-        user['email'] = request.form['email']
-        if user['email']=='' or usermodel.getByEmail(user['email']):
-            uniqueFlag = False
-
-        if request.form['password']!='' and request.form['password']==request.form['repassword']:
-            user['password'] = request.form['password']
-        else:
-            user['password']=''
-        user['usertype'] = ''
-        if uniqueFlag and  user['password']!='':
-            usermodel = db.User()
-            if usermodel.addNew(user):
-                return redirect(url_for('index'))        
     return render_template('users/register.html')
-
-@app.route('/test-connection')
-def test_connection():
-    try:
-        # Attempt to connect to the database
-        conn = mysql.connector.connect(host=hostname,
-                                       user = username,
-                                       password = password1,
-                                       database = databasename)
-        conn.close()
-        return 'Database connection successful'
-    except mysql.connector.Error as e:
-        return 'Database connection failed: ' + str(e)
 
 if __name__ == '__main__':
     app.run(debug=True)

@@ -55,9 +55,9 @@ def login():
         else:
             # Authentication failed
             error = 'Invalid username or password'
-            return render_template('login.html', form=form, error=error)
+            return render_template('users/login.html', form=form, error=error)
 
-    return render_template('login.html', form=form)
+    return render_template('users/login.html', form=form)
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
@@ -83,14 +83,14 @@ def register():
 
         return redirect('/login')
 
-    return render_template('register.html', form=form)
+    return render_template('users/register.html', form=form)
 
 @app.route('/dashboard')
 def dashboard():
     if 'user_id' in session:
         return render_template('dashboard.html')
     else:
-        return redirect('/login')
+        return redirect('users//login')
 
 @app.route('/logout')
 def logout():
