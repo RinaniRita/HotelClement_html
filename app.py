@@ -58,6 +58,10 @@ def online_booking():
 def Terms_of_service():
     return render_template('Terms_of_service.html')
 
+@app.route('/admin')
+def admin():
+    return render_template('admin.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user_id' in session:
