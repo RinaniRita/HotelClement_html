@@ -1,4 +1,5 @@
-from flask import Flask, render_template, request, redirect, session
+import sqlite3
+from flask import Flask, redirect, url_for, request, render_template, session
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import InputRequired, Length, ValidationError
@@ -34,6 +35,26 @@ class LoginForm(FlaskForm):
 def home():
     return render_template('Home.html')
 
+@app.route('/Book')
+def book():
+    return render_template('Book.html')
+
+@app.route('/contact_us')
+def contact_us():
+    return render_template('contact_us.html')
+
+@app.route('/Gallery')
+def gallery():
+    return render_template('Gallery.html')
+
+@app.route('/Online_booking')
+def online_booking():
+    return render_template('Online_booking.html')
+
+@app.route('/Terms_of_service')
+def Terms_of_service():
+    return render_template('Terms_of_service.html')
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if 'user_id' in session:
@@ -61,61 +82,24 @@ def login():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
-    if 'user_id' in session:
-        return redirect('/dashboard')
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        email = request.form['email']
 
-    form = RegisterForm()
-
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-
-        # Check if the username already exists
+        # Check if username already exists
         existing_user = User.query.filter_by(username=username).first()
         if existing_user:
-            error = 'Username already exists'
-            return render_template('register.html', form=form, error=error)
+            return 'Username already exists. Please choose a different one.'
 
         # Create a new user
         new_user = User(username=username, password=generate_password_hash(password))
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect('/login')
+        return redirect(url_for('index'))
 
-    return render_template('users/register.html', form=form)
-
-@app.route('/dashboard')
-def dashboard():
-    if 'user_id' in session:
-        return render_template('dashboard.html')
-    else:
-        return redirect('users//login')
-
-@app.route('/logout')
-def logout():
-    session.pop('user_id', None)
-    return redirect('/')
-
-@app.route('/Book')
-def book():
-    return render_template('Book.html')
-
-@app.route('/contact_us')
-def contact_us():
-    return render_template('contact_us.html')
-
-@app.route('/Gallery')
-def gallery():
-    return render_template('Gallery.html')
-
-@app.route('/Online_booking')
-def online_booking():
-    return render_template('Online_booking.html')
-
-@app.route('/Terms_of_service')
-def terms_of_service():
-    return render_template('Terms_of_service.html')
+    return render_template('users/register.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
