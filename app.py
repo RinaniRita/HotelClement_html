@@ -37,10 +37,6 @@ def login():
     return render_template('users/login.html')
 
 
-@app.route('/register')
-def register():
-    return render_template('users/register.html')
-
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
@@ -71,7 +67,11 @@ def register():
             return user['password']
         if usermodel.addNew(user):
             return redirect(url_for('index'))        
-    return render_template('users/register.html') 
+    return render_template('users/register.html')
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
