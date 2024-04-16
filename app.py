@@ -40,16 +40,15 @@ def login():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if request.method == 'POST':
-        user = dict();
+   
         # username = request.form['username']
         # password = request.form['password']
+        uniqueFlag = True
+        usermodel = db.User()
+        user = dict();
         user['username']= request.form['username']
         user['password'] = request.form['password']
         user['email'] = request.form['email']
-        uniqueFlag = True
-        usermodel = db.User()
-        usermodel.addNew(user)
-        user['username']= request.form['username']
         if user['username']=='' or usermodel.getByUsername(user['username']):
             uniqueFlag = False
         
@@ -64,11 +63,9 @@ def register():
         user['usertype'] = ''
         if uniqueFlag and  user['password']!='':
             usermodel = db.User()
-            return user['password']
-        if usermodel.addNew(user):
-            return redirect(url_for('index'))        
-    return render_template('users/register.html') 
-
+            if usermodel.addNew(user):
+                return redirect(url_for('index'))        
+        return render_template('users/register.html')
 
 @app.route('/test-connection')
 def test_connection():
