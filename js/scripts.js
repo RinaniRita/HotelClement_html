@@ -252,3 +252,4 @@ const areaChart = new ApexCharts(
   areaChartOptions
 );
 areaChart.render();
+
