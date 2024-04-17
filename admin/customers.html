@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Customers</title>
+
+    <!-- Montserrat Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="../static/styleadmin.css">
+  </head>
+  <body>
+    <div class="grid-container">
+
+      <!-- Header -->
+      <header class="header">
+        <div class="menu-icon" onclick="openSidebar()">
+          <span class="material-icons-outlined">menu</span>
+        </div>
+        <div class="header-left">
+          <span class="material-icons-outlined">search</span>
+        </div>
+        <div class="header-right">
+          <span class="material-icons-outlined">notifications</span>
+          <span class="material-icons-outlined">email</span>
+          <span class="material-icons-outlined">account_circle</span>
+        </div>
+      </header>
+      <!-- End Header -->
+
+      <!-- Sidebar -->
+      <aside id="sidebar">
+        <div class="sidebar-title">
+          <div class="sidebar-brand">
+            <span class="material-icons-outlined">shopping_cart</span> HOTELCLEMENT
+          </div>
+          <span class="material-icons-outlined" onclick="closeSidebar()">close</span>
+        </div>
+
+        <ul class="sidebar-list">
+          <li class="sidebar-list-item">
+            <a href="admin.html" target="_blank">
+              <span class="material-icons-outlined">dashboard</span> Dashboard
+            </a>
+            <li class="sidebar-list-item">
+              <a href="booking.html" target="_blank">
+                <span class="material-icons-outlined">shopping_cart</span> Booking
+              </a>
+            </li>
+          <li class="sidebar-list-item">
+            <a href="rooms.html" target="_blank">
+              <span class="material-icons-outlined">hotel</span> Rooms
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="customers.html" target="_blank">
+              <span class="material-icons-outlined">groups</span> Customers
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="earnings.html" target="_blank">
+              <span class="material-icons-outlined">payments</span> Earnings
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="reports.html" target="_blank">
+              <span class="material-icons-outlined">poll</span> Reports
+            </a>
+          </li>
+          <li class="sidebar-list-item">
+            <a href="setting.html" target="_blank">
+              <span class="material-icons-outlined">settings</span> Settings
+            </a>
+          </li>
+        </ul>
+      </aside>
+      <!-- End Sidebar -->
+<!-- Customer:-->
+      <section class="customer">
+        <div class="list-customer">
+          <h1>List of customer</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>Login</th>
+                <th>Logout</th>
+                <th>Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>01</td>
+                <td>Minh</td>
+                <td>Member</td>
+                <td>1:00 AM</td>
+                <td>2:00 AM</td>
+                <td><button>View</button></td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </section>
+
+</div>
+      <!-- Main -->
+      <main class="main-container">
+        <div class="main-title">
+          <h2>BOOKING</h2>
+        </div>
+
+        <!-- Add your booking content here -->
+
+      </main>
+      <!-- End Main -->
+
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../js/scripts.js"></script>
+    <script src="../js/jcustomer.js"></script>
+
+  </body>
+</html>
