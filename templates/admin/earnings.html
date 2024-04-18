@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Setting</title>
+    <title>Inventory</title>
 
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="../static/styleadmin.css">
   </head>
   <body>
-
     <div class="grid-container">
 
       <!-- Header -->
@@ -48,7 +47,7 @@
 
 
 <!-- Account-->
-        <a href="profile.html" >
+        <a href="/profile" >
           <button type="button" class="btn btn-secondary" style="color: red;">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"></path>
@@ -71,37 +70,36 @@
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
-            <a href="admin.html" >
+            <a href="/admin" >
               <span class="material-icons-outlined">dashboard</span> Dashboard
             </a>
-          </li>
+            <li class="sidebar-list-item">
+              <a href="/booking" >
+                <span class="material-icons-outlined">shopping_cart</span> Booking
+              </a>
+            </li>
           <li class="sidebar-list-item">
-            <a href="booking.html" >
-              <span class="material-icons-outlined">shopping_cart</span> Booking
-            </a>
-          </li>
-          <li class="sidebar-list-item">
-            <a href="rooms.html" >
+            <a href="/rooms" >
               <span class="material-icons-outlined">hotel</span> Rooms
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="customers.html" >
+            <a href="/customers" >
               <span class="material-icons-outlined">groups</span> Customers
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="earnings.html" >
+            <a href="/earnings" >
               <span class="material-icons-outlined">payments</span> Earnings
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="reports.html" >
+            <a href="/reports" >
               <span class="material-icons-outlined">poll</span> Reports
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="setting.html" >
+            <a href="/setting" >
               <span class="material-icons-outlined">settings</span> Settings
             </a>
           </li>
@@ -110,16 +108,17 @@
       <!-- End Sidebar -->
 
       <!-- Main -->
-      <main class="main-container2">
+      <main class="main-container">
         <div class="main-title">
-          <h2>SETTING</h2>
+          <h2>EARNINGS</h2>
         </div>
-        
+
 
       </main>
       <!-- End Main -->
 
     </div>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBud7TlRbs/ic4AwGcFZOxg5DpPt8EgeUIgIwzjWfXQKWA3" crossorigin="anonymous"></script>

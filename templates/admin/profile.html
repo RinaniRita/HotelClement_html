@@ -3,19 +3,19 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Dashboard</title>
+    <title>Setting</title>
 
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
+
     <!-- Material Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../static/styleadmin.css">
-
   </head>
   <body>
+
     <div class="grid-container">
 
       <!-- Header -->
@@ -48,7 +48,7 @@
 
 
 <!-- Account-->
-        <a href="profile.html" >
+        <a href="/profile" >
           <button type="button" class="btn btn-secondary" style="color: red;">
             <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
 <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0"></path>
@@ -71,37 +71,37 @@
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
-            <a href="admin.html" >
+            <a href="/admin" >
               <span class="material-icons-outlined">dashboard</span> Dashboard
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="booking.html" >
+            <a href="/booking" >
               <span class="material-icons-outlined">shopping_cart</span> Booking
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="rooms.html" >
+            <a href="/rooms" >
               <span class="material-icons-outlined">hotel</span> Rooms
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="customers.html" >
+            <a href="/customers" >
               <span class="material-icons-outlined">groups</span> Customers
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="earnings.html" >
+            <a href="/earnings" >
               <span class="material-icons-outlined">payments</span> Earnings
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="reports.html" >
+            <a href="/reports" >
               <span class="material-icons-outlined">poll</span> Reports
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="setting.html" >
+            <a href="/setting" >
               <span class="material-icons-outlined">settings</span> Settings
             </a>
           </li>
@@ -112,63 +112,13 @@
       <!-- Main -->
       <main class="main-container">
         <div class="main-title">
-          <h2>DASHBOARD</h2>
+          <h2>Profile</h2>
         </div>
+        
 
-        <div class="main-cards">
-
-          <div class="card">
-            <div class="card-inner">
-              <h3>BOOKING</h3>
-              <span class="material-icons-outlined">shopping_cart</span>
-            </div>
-            <h1>69</h1>
-          </div>
-
-          <div class="card">
-            <div class="card-inner">
-              <h3>ROOMS</h3>
-              <span class="material-icons-outlined">hotel</span>
-            </div>
-            <h1>6</h1>
-          </div>
-
-          <div class="card">
-            <div class="card-inner">
-              <h3>CUSTOMERS</h3>
-              <span class="material-icons-outlined">groups</span>
-            </div>
-            <h1>69</h1>
-          </div>
-
-          <div class="card">
-            <div class="card-inner">
-              <h3>Earning</h3>
-              <span class="material-icons-outlined">payments</span>
-            </div>
-            <h1>$69</h1>
-          </div>
-
-        </div>
-
-        <divclass="charts">
-
-          <div class="charts-card">
-            <h2 class="chart-title"> Rooms of this week</h2>
-            <div id="bar-chart"></div>
-          </div>
-
-          <div class="charts-card">
-            <h2 class="chart-title">Purchase Orders</h2>
-            <div id="area-chart"></div>
-          </div>
-
-        </div>
       </main>
       <!-- End Main -->
-
     </div>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBud7TlRbs/ic4AwGcFZOxg5DpPt8EgeUIgIwzjWfXQKWA3" crossorigin="anonymous"></script>
@@ -176,14 +126,5 @@
 
     <!-- Custom JS -->
     <script src="../js/scripts.js"></script>
-    <script>
-      function openSidebar() {
-        document.getElementById("sidebar").style.width = "250px";
-      }
-
-      function closeSidebar() {
-        document.getElementById("sidebar").style.width = "0";
-      }
-    </script>
   </body>
 </html>
