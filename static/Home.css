@@ -2,9 +2,18 @@
     height: 600px;
 }
 
+.c2-item{
+    height:auto;
+}
+
 .c-img {
     height: 120%;
     object-fit: cover;
+}
+
+.c2-img {
+    height: 120%;
+    object-fit: fill;
 }
 .nav-item {
     height: 1%;
