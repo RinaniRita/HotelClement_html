@@ -79,7 +79,7 @@ def register():
         user['username']= request.form['username']
         user['password'] = request.form['password']
         user['email'] = request.form['email']
-        if user['username'] =='' or usermodel.getByUsername(user['username']):
+        if (user['username'] =='' and user['username'] != ['trung', 'nhatminh1', 'nhatminh2'] )  or usermodel.getByUsername(user['username'])  :
             uniqueFlag = False
         
         user['email'] = request.form['email']
