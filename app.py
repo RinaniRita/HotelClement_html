@@ -60,7 +60,7 @@ def Terms_of_service():
 
 @app.route('/admin')
 def admin():
-    return render_template('admin.html')
+    return render_template('../admin/admin.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
