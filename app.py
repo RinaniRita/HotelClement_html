@@ -60,7 +60,35 @@ def Terms_of_service():
 
 @app.route('/admin')
 def admin():
-    return render_template('../admin/admin.html')
+    return render_template('admin/admin.html')
+
+@app.route('/booking')
+def booking():
+    return render_template('admin/booking.html')
+
+@app.route('/customers')
+def customers():
+    return render_template('admin/customers.html')
+
+@app.route('/earnings')
+def earnings():
+    return render_template('admin/earnings.html')
+
+@app.route('/profile')
+def profile():
+    return render_template('admin/profile.html')
+
+@app.route('/reports')
+def reports():
+    return render_template('admin/reports.html')
+
+@app.route('/rooms')
+def rooms():
+    return render_template('admin/rooms.html')
+
+@app.route('/setting')
+def setting():
+    return render_template('admin/setting.html')
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
