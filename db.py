@@ -158,8 +158,8 @@ class User(Model):
     def addNew(self, user):
         try:
             self.dbcursor.execute('insert into '+ self.tbName + 
-                                ' (username, email, password_hash) values (%s, %s, %s)',
-                                    (user['username'], user['email'], generate_password_hash(user['password'])))
+                                ' (username, email, password_hash, usertype) values (%s, %s, %s, %s)',
+                                    (user['username'], user['email'], generate_password_hash(user['password']), user['usertype']))
             myresult = self.conn.commit()
         except Error as e:
             print(e)
@@ -184,8 +184,7 @@ class User(Model):
     
     def getByUsername(self, username):
         try: 
-            self.dbcursor.execute('select * from '+ self.tbName + ' where username = %s',(username,))
-
+            self.dbcursor.execute('select * from '+ self.tbName + ' where username = %s',(username))
             myresult = self.dbcursor.fetchone()
         except Error as e:
             print(e)
@@ -207,7 +206,7 @@ class User(Model):
             if self.dbcursor.rowcount == 0:
                 myresult = ()            
         
-        return myresult
+        return myresult 
     
     def checkLogin(self, username, password):
         user = self.getByUsername(username)

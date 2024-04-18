@@ -1,5 +1,4 @@
-import mysql.connector,db
-from db import *
+import mysql.connector, db
 from mysql.connector import Error
 from markupsafe import escape
 from flask import Flask, redirect, url_for, request, render_template, session
@@ -8,48 +7,79 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = "RinaniRita"
 
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'is_login' in session:
+            return f(*args, **kwargs)
+        else:            
+            print("You need to login first")
+            return render_template('users/login.html', error='You need to login first')    
+    return wrap
 
 @app.route('/')
 def home():
-    return render_template('Home.html')
+    username=''
+    if 'username' in session and 'is_login' in session and session['is_login']:
+        username = session['username']
+    return render_template('Home.html',  username = username)
 
 @app.route('/Book')
 def book():
-    return render_template('Book.html')
+    username = session['username'] if 'username' in session and session['username']!='' else ''
+    return render_template('Book.html', username = username)
 
 @app.route('/contact_us')
 def contact_us():
-    return render_template('contact_us.html')
+    username = session['username'] if 'username' in session and session['username']!='' else ''
+    return render_template('contact_us.html', username = username)
 
 @app.route('/Gallery')
 def gallery():
-    return render_template('Gallery.html')
+    username = session['username'] if 'username' in session and session['username']!='' else ''
+    return render_template('Gallery.html',username = username)
 
 @app.route('/Online_booking')
 def online_booking():
-    return render_template('Online_booking.html')
+    username = session['username'] if 'username' in session and session['username']!='' else ''
+    return render_template('Online_booking.html', username = username)
 
 @app.route('/Terms_of_service')
 def Terms_of_service():
-    return render_template('Terms_of_service.html')
+    username = session['username'] if 'username' in session and session['username']!='' else ''
+    return render_template('Terms_of_service.html', username = username)
 
-@app.route('/login')
+@app.route('/admin')
+def admin():
+    username = session['username'] if 'username' in session and session['username']!='' else ''
+    return render_template('admin.html', username = username)
+
+
+@app.route('/login', methods=['POST', 'GET'])
 def login():
+    if request.method == 'POST' and request.form['username']!='':
+        username = request.form['username']
+        password = request.form['password']
+        usermodel = db.User()
+        if usermodel.checkLogin(username, password):
+            session['username'] = username
+            session['is_login'] = True
+            return redirect(url_for('home'))
+        
     return render_template('users/login.html')
 
-@app.route('/register', methods=['GET', 'POST'])
+@app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
-   
-        # username = request.form['username']
-        # password = request.form['password']
+        username = request.form['username']
+        password = request.form['password']
         uniqueFlag = True
         usermodel = db.User()
-        user = dict();
+        user = dict()
         user['username']= request.form['username']
         user['password'] = request.form['password']
         user['email'] = request.form['email']
-        if user['username']=='' or usermodel.getByUsername(user['username']):
+        if user['username'] =='' or usermodel.getByUsername(user['username']):
             uniqueFlag = False
         
         user['email'] = request.form['email']
@@ -64,21 +94,14 @@ def register():
         if uniqueFlag and  user['password']!='':
             usermodel = db.User()
             if usermodel.addNew(user):
-                return redirect(url_for('index'))        
-        return render_template('users/register.html')
+                return redirect(url_for('login'))        
+    return render_template('users/register.html')
 
-@app.route('/test-connection')
-def test_connection():
-    try:
-        # Attempt to connect to the database
-        conn = mysql.connector.connect(host=hostname,
-                                       user = username,
-                                       password = password1,
-                                       database = databasename)
-        conn.close()
-        return 'Database connection successful'
-    except mysql.connector.Error as e:
-        return 'Database connection failed: ' + str(e)
+
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
 
 if __name__ == '__main__':
     app.run(debug=True)
