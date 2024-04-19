@@ -65,19 +65,7 @@ class Customer(Model):
         
         return myresult
     
-    def getDetailById(self, id):
-        try:
-            self.dbcursor.execute('select s.*, roomstatus.TName from  '+ self.tbName + ' s left join roomstatus \
-                                on s.id_cus = roomstatus.id_cus where idcostumer = {}'.format(id))
-            myresult = self.dbcursor.fetchone()
-        except Error as e:
-            print(e)
-            myresult = ()
-        else:    
-            if self.dbcursor.rowcount == 0:
-                myresult = ()            
-        
-        return myresult
+
 
     def addNew(self, costumer):
         try:
@@ -184,7 +172,7 @@ class User(Model):
     
     def getByUsername(self, username):
         try: 
-            self.dbcursor.execute('select * from '+ self.tbName + ' where username = %s',(username))
+            self.dbcursor.execute('select * from '+ self.tbName + ' where username = %s',(username,))
             myresult = self.dbcursor.fetchone()
         except Error as e:
             print(e)

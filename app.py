@@ -7,6 +7,7 @@ from functools import wraps
 app = Flask(__name__)
 app.secret_key = "RinaniRita"
 
+
 def login_required(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -16,6 +17,7 @@ def login_required(f):
             print("You need to login first")
             return render_template('users/login.html', error='You need to login first')    
     return wrap
+
 
 @app.route('/')
 def home():
@@ -46,27 +48,23 @@ def online_booking():
 
 @app.route('/Terms_of_service')
 def Terms_of_service():
-    username = session['username'] if 'username' in session and session['username']!='' else ''
-    return render_template('Terms_of_service.html', username = username)
-
-@app.route('/admin')
-def admin():
-    username = session['username'] if 'username' in session and session['username']!='' else ''
-    return render_template('admin.html', username = username)
-
+    return render_template('Terms_of_service.html')
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST' and request.form['username']!='':
         username = request.form['username']
         password = request.form['password']
-        usermodel = db.User()
+        usermodel = db.User() 
         if usermodel.checkLogin(username, password):
-            session['username'] = username
-            session['is_login'] = True
-            return redirect(url_for('home'))
-        
+                session['username'] = username
+                session['is_login'] = True
+                return redirect(url_for('home')) 
+        else:
+            error_message = 'Username not found or Invalid password'
+            return render_template('users/login.html', error=error_message)
     return render_template('users/login.html')
+
 
 @app.route('/register', methods=['POST', 'GET'])
 def register():
@@ -77,9 +75,7 @@ def register():
         usermodel = db.User()
         user = dict()
         user['username']= request.form['username']
-        user['password'] = request.form['password']
-        user['email'] = request.form['email']
-        if (user['username'] =='' and user['username'] != ['trung', 'nhatminh1', 'nhatminh2'] )  or usermodel.getByUsername(user['username'])  :
+        if user['username'] =='' or usermodel.getByUsername(user['username']):
             uniqueFlag = False
         
         user['email'] = request.form['email']
@@ -97,11 +93,16 @@ def register():
                 return redirect(url_for('login'))        
     return render_template('users/register.html')
 
+@app.route('/logout')
+@login_required
+def logout():
+    session.pop('username', None)
+    session.pop('is_login', None)
+    session.clear()
+    return redirect(url_for('login'))
 
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
+
 
 if __name__ == '__main__':
     app.run(debug=True)
