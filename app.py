@@ -1,7 +1,7 @@
 import mysql.connector, db
 from mysql.connector import Error
 from markupsafe import escape
-from flask import Flask, redirect, url_for, request, render_template, session
+from flask import Flask, redirect, url_for, request, render_template, session, jsonify
 from functools import wraps
 
 app = Flask(__name__)
@@ -69,15 +69,14 @@ def login():
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
         uniqueFlag = True
         usermodel = db.User()
         user = dict()
-        user['username']= request.form['username']
+        user['username']= request.form['username'].strip()
         if user['username'] =='' or usermodel.getByUsername(user['username']):
-            uniqueFlag = False
-        
+            error_message = "Username is empty or already exists."
+            return render_template('users/register.html', error=error_message)
+            
         user['email'] = request.form['email']
         if user['email']=='' or usermodel.getByEmail(user['email']):
             uniqueFlag = False
@@ -100,9 +99,6 @@ def logout():
     session.pop('is_login', None)
     session.clear()
     return redirect(url_for('login'))
-
-
-
 
 if __name__ == '__main__':
     app.run(debug=True)

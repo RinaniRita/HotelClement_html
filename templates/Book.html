@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="../static/vendors/linericon/style.css">
+        <link rel="stylesheet" href="../static/css/font-awesome.min.css">
+        <link rel="stylesheet" href="../static/vendors/owl-carousel/owl.carousel.min.css">
+        <link rel="stylesheet" href="../static/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.css">
+        <link rel="stylesheet" href="../static/vendors/nice-select/css/nice-select.css">
+        <link rel="stylesheet" href="../static/css/style.css">
+        
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+        
+        <link rel="stylesheet" href="../static/Book.css">
+        <title>Booking site</title>
+    </head>
+    <body class="p-3 m-0 border-0 bd-example m-0 border-0">
+        <nav class="navbar navbar-expand-lg bg-body-tertiary">
+            <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="../static/img/clement-web-bezova.png" alt="Bootstrap" width="auto" height="80">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/Online_booking">
+                        <button type="button" class="btn btn-warning">Online Booking</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/">
+                        <button type="button" class="btn btn-light">Home</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Gallery">
+                        <button type="button" class="btn btn-light">Gallery</button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contact_us">
+                        <button type="button" class="btn btn-light">Contact Us</button>
+                        </a>
+                    </li>
+                </ul>
+                <ul class="nav nav-pills nav-justified ms-auto p-2" id="ex1" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="/login">
+                        <button type="button" class="btn btn-warning">Login</button>
+                        </a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="/register">
+                        <button type="button" class="btn btn-light">Register</button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            </div>
+        </nav>
+        <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner">
+            <div class="carousel-item active c-item">
+                <img src="../static/img/016a-hotel-clement-prague-standard-room-smallhq.jpg" class="d-block w-100 c-img" alt="first slide">
+            </div>
+            <div class="carousel-item c-item">
+                <img src="../static/img/018b-hotel-clement-prague-comfort-room-twin-view-hq (1).jpg" class="d-block w-100 c-img" alt="second slide">
+            </div>
+            <div class="carousel-item c-item">
+                <img src="../static/img/902-1.jpg" class="d-block w-100 c-img" alt="third slide">
+            </div>
+            <div class="carousel-item c-item">
+                <img src="../static/img/jprerovsky-hotel-clement-807-16a2955.jpg" class="d-block w-100 c-img" alt="4th slide">
+            </div>
+            <div class="carousel-item c-item">
+                <img src="../static/img/jprerovsky-hotel-clement-807-16a3047.jpg" class="d-block w-100 c-img" alt="5th slide">
+            </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+
+        <section>
+            <br>
+            <div class="d_flex align-items-center">
+            </div>
+            <div class="hotel_booking_area position">
+                <div class="container">
+                    <div class="hotel_booking_table">
+                        <div class="col-md-3">
+                            <h2 style="color: #000000">Book<br> Your Room</h2>
+                        </div>
+                        <div class="col-md-9">
+                            <div class="boking_table">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker11'>
+                                                    <input type='text' class="form-control" placeholder="Arrival Date"/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class='input-group date' id='datetimepicker1'>
+                                                    <input type='text' class="form-control" placeholder="Departure Date"/>
+                                                    <span class="input-group-addon">
+                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <div class="input-group">
+                                                <select class="wide">
+                                                    <option data-display="Adult">Adult</option>
+                                                    <option value="1">18-22</option>
+                                                    <option value="2">23-65</option>
+                                                    <option value="3">65+</option>
+                                                </select>
+                                            </div>
+                                            <div class="input-group">
+                                                <select class="wide">
+                                                    <option data-display="Child">Child</option>
+                                                    <option value="1">1-5</option>
+                                                    <option value="2">6-12</option>
+                                                    <option value="3">13-17</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="book_tabel_item">
+                                            <div class="input-group">
+                                                <select class="wide">
+                                                    <option data-display="Rooms">Rooms</option>
+                                                    <option value="1">SUPERIOR SUITE</option>
+                                                    <option value="2">SUPERIOR WITH BALCONY</option>
+                                                    <option value="3">SUPERIOR WITH PANORAMIC WINDOW</option>
+                                                    <option value="4">SUPERIOR ROOM</option>
+                                                    <option value="5">JUNIOR SUITE</option>
+                                                    <option value="6">COMFORT DOUBLE/TWIN ROOM</option>
+                                                </select>
+                                            </div>
+                                            <a class="book_now_btn button_hover" href="#">Book Now</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            <br>
+            <br>
+        </div>
+            <h5>
+                <small>
+                    <footer class="text-center text-lg-start bg-body-tertiary text-muted">
+                        <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+                            <div class="me-5 d-none d-lg-block">
+                                <span>Get connected with us on social networks:</span>
+                            </div>
+                            <div>
+                                <a href="https://www.facebook.com/HotelClementPlague" class="me-4 text-reset">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                                <a href="https://twitter.com/HotelClementPlague" class="me-4 text-reset">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="https://www.google.com" class="me-4 text-reset">
+                                    <i class="fab fa-google"></i>
+                                </a>
+                                <a href="https://www.instagram.com/HotelClementPlague" class="me-4 text-reset">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="https://www.linkedin.com" class="me-4 text-reset">
+                                    <i class="fab fa-linkedin"></i>
+                                </a>
+                                <a href="https://www.github.com" class="me-4 text-reset">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                            </div>
+                        </section>
+                        <section>
+                            <div class="container text-center text-md-start mt-5">
+                                <div class="row mt-3">
+                                    <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                                        <h6 class="text-uppercase fw-bold mb-4">
+                                            <i class="fas fa-gem me-3"></i>Hotel Clement Plague
+                                        </h6>
+                                        <p>RinaniRita</p>
+                                        <br>
+                                        <p><small>2024 Hotel Clement designed by RinaniRita</small></p>
+                                    </div>
+                                    <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                                        <h6 class="text-uppercase fw-bold mb-4">Social networks</h6>
+                                        <p>
+                                            <a href="https://www.facebook.com/HotelClementPlague" class="text-reset">Facebook</a>
+                                        </p>
+                                        <p>
+                                            <a href="https://www.instagram.com/HotelClementPlague" class="text-reset">Instagram</a>
+                                        </p>
+                                        <p>
+                                            <a href="https://twitter.com/HotelClementPlague" class="text-reset">Twitter</a>
+                                        </p>
+                                        <p>
+                                            <a href="https://www.youtube.com/channel/HotelClementPlague" class="text-reset">YouTube</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                                        <h6 class="text-uppercase fw-bold mb-4">Useful links</h6>
+                                        <p>
+                                            <a href="#!" class="text-reset">Pricing</a>
+                                        </p>
+                                        <p>
+                                            <a href="#!" class="text-reset">Settings</a>
+                                        </p>
+                                        <p>
+                                            <a href="#!" class="text-reset">Orders</a>
+                                        </p>
+                                        <p>
+                                            <a href="#!" class="text-reset">Help</a>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                                        <h6 class="text-uppercase fw-bold mb-4">Contact</h6>
+                                        <p><i class="fas fa-home me-3"></i> Ha Noi, HN 735, VN</p>
+                                        <p>
+                                            <i class="fas fa-envelope me-3"></i> HotelClementPlague@gmail.com
+                                        </p>
+                                        <p><i class="fas fa-phone me-3"></i> + 09 234 777 88</p>
+                                        <p><i class="fas fa-print me-3"></i> + 06 274 567 09</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        <div class="text-center p-4" style="background-color: rgba(0, 0, 0, 0.05);">
+                            © 2024 HotelClement.com. All rights reserved.
+                        </div>
+                    </footer>
+                </small>
+            </h5>
+    <script src="../static/js/jquery-3.2.1.min.js"></script>
+    <script src="../static/js/popper.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+    <script src="../static/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="../static/js/jquery.ajaxchimp.min.js"></script>
+    <script src="../static/js/mail-script.js"></script>
+    <script src="../static/vendors/bootstrap-datepicker/bootstrap-datetimepicker.min.js"></script>
+    <script src="../static/vendors/nice-select/js/jquery.nice-select.js"></script>
+    <script src="../static/js/mail-script.js"></script>
+    <script src="../static/js/stellar.js"></script>
+    <script src="../static/vendors/lightbox/simpleLightbox.min.js"></script>
+    <script src="../static/js/custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBud7TlRbs/ic4AwGcFZOxg5DpPt8EgeUIgIwzjWfXQKWA3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+        </body>
+</html>
