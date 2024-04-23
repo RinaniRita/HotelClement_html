@@ -58,6 +58,10 @@ def online_booking():
 def Terms_of_service():
     return render_template('Terms_of_service.html')
 
+@app.route('/payments')
+def payments():
+    return render_template('payments_info.html')
+
 @app.route('/admin')
 def admin():
     return render_template('admin/admin.html')
