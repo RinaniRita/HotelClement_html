@@ -32,17 +32,14 @@ h3 { font-size: 18px;}
 h5 { font-size: 16px;}
 h6 { font-size: 14px;}
 
-strong {
-  letter-s;;Dacing: 1px;
-}
 
 code {
-  background-color: #ddd;
-  border-radius: 3px;
-  color: #000;
-  font-size: 85%;
-  margin: 0;
-  padding: 5px 10px;
+    background-color: #ddd;
+    border-radius: 3px;
+    color: #000;
+    font-size: 85%;
+    margin: 0;
+    padding: 5px 10px;
 }
 
 code a {
@@ -54,7 +51,7 @@ code a:hover {
 }
 
 section p {
-  line-height: 28px;
+    line-height: 28px;
 }
 
 .clearfix:before,
@@ -65,12 +62,9 @@ section p {
 .clearfix:after {
     clear: both;
 }
-.clearfix {
-    *zoom: 1;
-}
 
 .tan {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .fifteen{
@@ -97,7 +91,7 @@ section p {
 
 
 .main-content section {
-  margin: 0 5%;
+    margin: 0 5%;
 }
 
 
@@ -126,10 +120,10 @@ section p {
     display: block;
     padding: 10px 35px;
     -webkit-transition: all 0.3s ease-in 0s;
-       -moz-transition: all 0.3s ease-in 0s;
-        -ms-transition: all 0.3s ease-in 0s;
-         -o-transition: all 0.3s ease-in 0s;
-            transition: all 0.3s ease-in 0s;
+        -moz-transition: all 0.3s ease-in 0s;
+            -ms-transition: all 0.3s ease-in 0s;
+            -o-transition: all 0.3s ease-in 0s;
+                transition: all 0.3s ease-in 0s;
 }
 
 .left-nav ul li a:hover, .left-nav ul li .current {
