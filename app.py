@@ -66,6 +66,8 @@ def login():
     return render_template('users/login.html')
 
 
+error_message = None
+
 @app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
@@ -73,10 +75,10 @@ def register():
         usermodel = db.User()
         user = dict()
         user['username']= request.form['username'].strip()
-        if user['username'] =='' or usermodel.getByUsername(user['username']):
+        if (user['username'] =='') or (user['username'] == usermodel.getByUsername(user['username'])):
             error_message = "Username is empty or already exists."
-            return render_template('users/register.html', error=error_message)
-            
+            uniqueFlag = False  
+
         user['email'] = request.form['email']
         if user['email']=='' or usermodel.getByEmail(user['email']):
             uniqueFlag = False
@@ -89,8 +91,9 @@ def register():
         if uniqueFlag and  user['password']!='':
             usermodel = db.User()
             if usermodel.addNew(user):
-                return redirect(url_for('login'))        
-    return render_template('users/register.html')
+                return redirect(url_for('login'))   
+        return render_template('users/register.html')
+    return render_template('users/register.html', error=error_message)
 
 @app.route('/logout')
 @login_required
