@@ -12,6 +12,10 @@
         <link rel="stylesheet" href="../static/vendors/nice-select/css/nice-select.css">
         <link rel="stylesheet" href="../static/css/style.css">
         
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <script src="https://unpkg.com/gijgo@1.9.14/js/gijgo.min.js" type="text/javascript"></script>
+        <link href="https://unpkg.com/gijgo@1.9.14/css/gijgo.min.css" rel="stylesheet" type="text/css" />
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
         
@@ -94,34 +98,27 @@
         </div>
 
         <section>
+            <form action="{{url_for('online_booking')}}" method="post" >
             <br>
             <div class="d_flex align-items-center">
             </div>
             <div class="hotel_booking_area position">
                 <div class="container">
+                    <div class="col text-center" >
+                        <h2 style="color: #000000">Book Now</h2>
+                    </div>
                     <div class="hotel_booking_table">
-                        <div class="col-md-3">
-                            <h2 style="color: #000000">Book<br> Your Room</h2>
-                        </div>
-                        <div class="col-md-9">
-                            <div class="boking_table">
+                        <div class="col">
+                            <div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="book_tabel_item">
                                             <div class="form-group">
-                                                <div class='input-group date' id='datetimepicker11'>
-                                                    <input type='text' class="form-control" placeholder="Arrival Date"/>
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                    </span>
-                                                </div>
+                                                <input id="datepicker" class="form-control" placeholder="Arrival Date">
                                             </div>
-                                            <div class="form-group">
-                                                <div class='input-group date' id='datetimepicker1'>
-                                                    <input type='text' class="form-control" placeholder="Departure Date"/>
-                                                    <span class="input-group-addon">
-                                                        <i class="fa fa-calendar" aria-hidden="true"></i>
-                                                    </span>
+                                            <div class="col">
+                                                <div class="form-group">
+                                                    <input id="datepicker2" class="form-control" placeholder="Departure Date">
                                                 </div>
                                             </div>
                                         </div>
@@ -129,19 +126,19 @@
                                     <div class="col-md-4">
                                         <div class="book_tabel_item">
                                             <div class="input-group">
-                                                <select class="wide">
+                                                <select name='adults_number' class="wide">
                                                     <option data-display="Number of Adults">Adult</option>
-                                                    <option value="1">1-2</option>
-                                                    <option value="2">3-5</option>
-                                                    <option value="3">5+</option>
+                                                    <option id='1' value="1-2">1-2</option>
+                                                    <option id='2' value="3-5">3-5</option>
+                                                    <option id='3' value="5+">5+</option>
                                                 </select>
                                             </div>
                                             <div class="input-group">
-                                                <select class="wide">
+                                                <select name='children_number' class="wide">
                                                     <option data-display="Number of Children">Child</option>
-                                                    <option value="1">1-2</option>
-                                                    <option value="2">3=5</option>
-                                                    <option value="3">5+</option>
+                                                    <option value="1-2">1-2</option>
+                                                    <option value="3-5">3-5</option>
+                                                    <option value="5+">5+</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -149,18 +146,40 @@
                                     <div class="col-md-4">
                                         <div class="book_tabel_item">
                                             <div class="input-group">
-                                                <select class="wide">
-                                                    <option data-display="Rooms">Rooms</option>
-                                                    <option value="1">SUPERIOR SUITE</option>
-                                                    <option value="2">SUPERIOR WITH BALCONY</option>
-                                                    <option value="3">SUPERIOR WITH PANORAMIC WINDOW</option>
-                                                    <option value="4">SUPERIOR ROOM</option>
-                                                    <option value="5">JUNIOR SUITE</option>
-                                                    <option value="6">COMFORT DOUBLE/TWIN ROOM</option>
+                                                <select class="wide" name='roomnumber'>
+                                                    <option  data-display="Rooms">Rooms</option>
+                                                    <option  value="1">SUPERIOR SUITE</option>
+                                                    <option  value="2">SUPERIOR WITH BALCONY</option>
+                                                    <option  value="3">SUPERIOR WITH PANORAMIC WINDOW</option>
+                                                    <option  value="4">SUPERIOR ROOM</option>
+                                                    <option  value="5">JUNIOR SUITE</option>
+                                                    <option  value="6">COMFORT DOUBLE/TWIN ROOM</option>
                                                 </select>
                                             </div>
-                                            <a class="book_now_btn button_hover" href="/payments">Book Now</a>
+                                            <div class="input-group">
+                                                <select class="wide" name='Cities'>
+                                                    <option  data-display="Cities">Cities</option>
+                                                    <option  value="1">Aberdeen</option>
+                                                    <option  value="2">Belfast</option>
+                                                    <option  value="3">Bristol </option>
+                                                    <option  value="4">Cardiff</option>
+                                                    <option  value="5">Edinburgh</option>
+                                                    <option  value="6">Glasgow</option>
+                                                    <option  value="7">London</option>
+                                                    <option  value="8">Manchester</option>
+                                                    <option  value="9">New Castle</option>
+                                                    <option  value="10">Norwich</option>
+                                                    <option  value="11">Nottingham</option>
+                                                    <option  value="12">Oxford</option>
+                                                    <option  value="13">Plymouth</option>
+                                                    <option  value="14">Swansea</option>
+                                                    <option  value="15">Bournemouth</option>
+                                                    <option  value="16">Kent</option>
+                                                </select>
                                         </div>
+                                    </div>
+                                    <div class="col">
+                                        <button class="book_now_btn button_hover" type="submit">Book Now</button>
                                     </div>
                                 </div>
                             </div>
@@ -168,6 +187,7 @@
                     </div>
                 </div>
             </div>
+        </form>
         </section>
             <br>
             <br>
@@ -259,6 +279,16 @@
                     </footer>
                 </small>
             </h5>
+    <script>
+        $('#datepicker').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+    </script>
+    <script>
+        $('#datepicker2').datepicker({
+            uiLibrary: 'bootstrap5'
+        });
+    </script>
     <script src="../static/js/jquery-3.2.1.min.js"></script>
     <script src="../static/js/popper.js"></script>
     <script src="../static/js/bootstrap.min.js"></script>
