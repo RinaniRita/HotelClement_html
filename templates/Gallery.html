@@ -45,6 +45,12 @@
                     </ul>
                     <ul class="nav nav-pills nav-justified ms-auto p-2" id="ex1" role="tablist">
                         <li class="nav-item" role="presentation">
+                            {% if username %}
+                            <a href="/account">Hello {{ username }}</a>
+                            <a href="{{ url_for('logout') }}">
+                            <button type="button" class="btn btn-warning">Log out</button>
+                            </a>
+                            {% else %}
                             <a class="nav-link" href="/login">
                             <button type="button" class="btn btn-warning">Login</button>
                             </a>
@@ -54,6 +60,7 @@
                             <button type="button" class="btn btn-light">Register</button>
                             </a>
                         </li>
+                        {% endif %}
                     </ul>
                 </div>
                 </div>
