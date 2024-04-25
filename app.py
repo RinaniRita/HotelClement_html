@@ -1,58 +1,71 @@
 import mysql.connector, db
 from mysql.connector import Error
 from markupsafe import escape
-from flask import Flask, redirect, url_for, request, render_template, session
+from flask import Flask, redirect, url_for, request, render_template, session, jsonify
 from functools import wraps
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
-from flask_sqlalchemy import SQLAlchemy
-from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 app.secret_key = "RinaniRita"
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
-db = SQLAlchemy(app)
 
-class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True, nullable=False)
-    password = db.Column(db.String(100), nullable=False)
 
-class RegisterForm(FlaskForm):
-    username = StringField('Username', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
-    password = PasswordField('Password', validators=[InputRequired(), Length(min=6, max=20)], render_kw={"placeholder": "Password"})
-    submit = SubmitField('Register')
+def login_required(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'is_login' in session:
+            return f(*args, **kwargs)
+        else:            
+            print("You need to login first")
+            return render_template('users/login.html', error='You need to login first')    
+    return wrap
 
-    def validate_username(self, field):
-        existing_user = User.query.filter_by(username=field.data).first()
-        if existing_user:
-            raise ValidationError('That username already exists. Please choose a different one.')
-
-class LoginForm(FlaskForm):
-    username = StringField('Username', validators=[InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
-    password = PasswordField('Password', validators=[InputRequired(), Length(min=6, max=20)], render_kw={"placeholder": "Password"})
-    submit = SubmitField('Login')
+@app.route('/account')
+@login_required
+def account():
+    username=''
+    if 'username' in session and 'is_login' in session and session['is_login']:
+        username = session['username']
+    return render_template('account.html',  username = username)
 
 @app.route('/')
 def home():
-    return render_template('Home.html')
+    username=''
+    if 'username' in session and 'is_login' in session and session['is_login']:
+        username = session['username']
+    return render_template('Home.html',  username = username)
 
-@app.route('/Book')
+@app.route('/Book',  methods=['GET', 'POST'])
+@login_required
 def book():
-    return render_template('Book.html')
+    if request.method == 'POST':
+        usermodel = db.Book()
+        book = dict()
+        book['booking_date']= request.form['booking_date']
+        book['departure_date']=request.form['departure_date']
+        book['adults_number']=request.form['adults_number']
+        book['children_number']=request.form['children_number']
+        book['roomnumber']=request.form['roomnumber']
+        book['users_id'] = session['id']
+        print(book)
+        if usermodel.addNew(book):
+            return redirect(url_for('home'))   
+    
+    username = session['username'] if 'username' in session and session['username']!='' else ''
+    return render_template('Book.html', username = username)
 
 @app.route('/contact_us')
 def contact_us():
-    return render_template('contact_us.html')
+    username = session['username'] if 'username' in session and session['username']!='' else ''
+    return render_template('contact_us.html', username = username)
 
 @app.route('/Gallery')
 def gallery():
-    return render_template('Gallery.html')
+    username = session['username'] if 'username' in session and session['username']!='' else ''
+    return render_template('Gallery.html',username = username)
 
 @app.route('/Online_booking')
 def online_booking():
-    return render_template('Online_booking.html')
+    username = session['username'] if 'username' in session and session['username']!='' else ''
+    return render_template('Online_booking.html', username = username)
 
 @app.route('/Terms_of_service')
 def Terms_of_service():
@@ -94,66 +107,57 @@ def rooms():
 def setting():
     return render_template('admin/setting.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['POST', 'GET'])
 def login():
-    if 'user_id' in session:
-        return redirect('/dashboard')
-
-    form = LoginForm()
-
-    if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
-
-        # Retrieve the user from the database
-        user = User.query.filter_by(username=username).first()
-
-        if user and check_password_hash(user.password, password):
-            # Authentication successful
-            session['user_id'] = user.id
-            return redirect('/dashboard')
+    if request.method == 'POST' and request.form['username']!='':
+        username = request.form['username']
+        password = request.form['password']
+        usermodel = db.User() 
+        if usermodel.checkLogin(username, password):
+                session['username'] = username
+                user = usermodel.getByUsername(username)
+                session['id'] = user[0]
+                session['is_login'] = True
+                return redirect(url_for('home')) 
         else:
-            # Authentication failed
-            error = 'Invalid username or password'
-            return render_template('users/login.html', form=form, error=error)
+            error_message = 'Username not found or Invalid password'
+            return render_template('users/login.html', error=error_message)
+    return render_template('users/login.html')
 
-    return render_template('users/login.html', form=form)
 
-@app.route('/register')
+@app.route('/register', methods=['POST', 'GET'])
 def register():
     if request.method == 'POST':
-        user = dict()
-        # username = request.form['username']
-        # password = request.form['password']
-        user['username']= request.form['username']
-        user['password'] = request.form['password']
-        user['email'] = request.form['email']
-        uniqueFlag = True
         usermodel = db.User()
-        usermodel.addNew(user)
-        user['username']= request.form['username']
-        if user['username']=='' or usermodel.getByUsername(user['username']):
-            uniqueFlag = False
-        
+        user = dict()
+        user['username']= request.form['username'].strip()
+        if (user['username'] =='') or (user['username'] == usermodel.getByUsername(user['username'])):
+            error_message = 'existed username'
+            return render_template('users/register.html', error = error_message)
+
         user['email'] = request.form['email']
         if user['email']=='' or usermodel.getByEmail(user['email']):
-            uniqueFlag = False
+            error_message = 'existed email'
+            return render_template('users/register.html', error = error_message)
 
         if request.form['password']!='' and request.form['password']==request.form['repassword']:
             user['password'] = request.form['password']
         else:
             user['password']=''
         user['usertype'] = ''
-        if uniqueFlag and  user['password']!='':
+        if user['password']!='':
             usermodel = db.User()
-            return user['password']
-        if usermodel.addNew(user):
-            return redirect(url_for('index'))        
+            if usermodel.addNew(user):
+                return redirect(url_for('login'))   
     return render_template('users/register.html')
 
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('404.html'), 404
+@app.route('/logout')
+@login_required
+def logout():
+    session.pop('username', None)
+    session.pop('is_login', None)
+    session.clear()
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)

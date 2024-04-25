@@ -1,4 +1,3 @@
-
 body {
   margin: 0;
   padding: 0;
@@ -79,13 +78,13 @@ body {
 }
 
 .sidebar-list-item:hover {
-  background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(248, 246, 246, 0.2);
   cursor: pointer;
 }
 
 .sidebar-list-item > a {
   text-decoration: none;
-  color: #9e9ea4;
+  color: #ffffff;
 }
 
 .sidebar-responsive {
@@ -282,12 +281,19 @@ body {
   font-size: 14px;
   font-weight: 500;
 }
+.status.paid{
+  padding: 2px 4px;
+  background: #b1aee8;
+  color: var(--white);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+}
 .details {
     grid-template-columns: 1fr;
     max-width: 768px;
   }
 .recentOrders {
-    overflow-x: auto;
     background-color: #000000;
   }
   
@@ -314,7 +320,7 @@ body {
   border-radius: 5px 5px 0 0;
 }
 table thead tr{
-  color:#ffffff;
+  color:#000000;
   background: #5a54cb;
   text-align:left;
   font-weight: bold;
@@ -324,7 +330,7 @@ table thead tr{
   padding:12px 15px;
 }
 .table tbody tr{
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #000000;
 }
 
 .table tbody tr.active{
@@ -356,7 +362,7 @@ thead{
 th{
   padding:15px;
   text-align: left;
-  border:1px solid rgb(0, 0, 0)
+  border:1px solid rgb(255, 255, 255)
 }
 
 tfoot{
@@ -377,4 +383,73 @@ tfoot{
   overflow-y: auto;
   padding: 20px 20px;
   color: rgba(0, 0, 0, 0.95);
+}
+.main-container {
+  grid-area: main;
+  overflow-y: auto;
+  padding: 20px 20px;
+  color:  rgba(255, 255, 255, 0.95);
+  margin-top: 70px; 
+}
+.custom-btn {
+  color: red; 
+  background-color: #fff; 
+  border-color: red; 
+}
+
+.custom-btn:hover {
+  color: #fff; 
+  background-color: red; 
+  border-color: red; 
+}
+.table--container {
+  margin: 0 auto; 
+  width: 80%; 
+}
+
+table {
+  width: 100%; 
+}
+
+th, td {
+  text-align: center; 
+  color:#ffffff
+}
+
+th {
+  text-align: left;
+}
+.table {
+  width: 100%;
+  table-layout: auto;
+}
+.hidden {
+  display: none;
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  padding: 10px;
+  z-index: 1;
+  border: 1px solid #ddd;
+}
+
+.dropdown-content tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.dropdown-content tr td {
+  padding: 5px;
+}
+
+.dropdown-content.hidden {
+  display: none;
+}
+
+
+.table{
+background-color: #000000;
+border:1px #000000;
 }

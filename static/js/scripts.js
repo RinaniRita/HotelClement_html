@@ -16,6 +16,13 @@ function closeSidebar() {
     sidebarOpen = false;
   }
 }
+function openSidebar() {
+  document.getElementById("sidebar").style.width = "250px";
+}
+
+function closeSidebar() {
+  document.getElementById("sidebar").style.width = "0";
+}
 
 // ---------- CHARTS ----------
 
@@ -253,3 +260,125 @@ const areaChart = new ApexCharts(
 );
 areaChart.render();
 
+//Barchart
+const revenueData = [10000, 12000, 11000, 13000, 15000, 14000, 16000, 17000, 18000, 19000, 20000, 22000];
+
+const yearlyRevenueChartOptions = {
+  series: [
+    {
+      name: 'Yearly Revenue',
+      data: revenueData,
+    },
+  ],
+  chart: {
+    type: 'line',
+    background: 'transparent',
+    height: 400,
+    toolbar: {
+      show: false,
+    },
+  },
+  colors: ['#ff5858'],
+  labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  dataLabels: {
+    enabled: false,
+  },
+  grid: {
+    borderColor: '#55596e',
+    yaxis: {
+      lines: {
+        show: true,
+      },
+    },
+    xaxis: {
+      lines: {
+        show: true,
+      },
+    },
+  },
+  legend: {
+    labels: {
+      colors: '#f5f7ff',
+    },
+    show: true,
+    position: 'top',
+  },
+  markers: {
+    size: 6,
+    strokeColors: '#1b2635',
+    strokeWidth: 3,
+  },
+  stroke: {
+    curve: 'smooth',
+  },
+  xaxis: {
+    axisBorder: {
+      color: '#55596e',
+      show: true,
+    },
+    axisTicks: {
+      color: '#55596e',
+      show: true,
+    },
+    labels: {
+      offsetY: 5,
+      style: {
+        colors: '#f5f7ff',
+      },
+    },
+  },
+  yaxis: {
+    title: {
+      text: 'Revenue',
+      style: {
+        color: '#f5f7ff',
+      },
+    },
+    labels: {
+      style: {
+        colors: '#f5f7ff',
+      },
+    },
+  },
+  tooltip: {
+    shared: true,
+    intersect: false,
+    theme: 'dark',
+  },
+};
+
+const yearlyRevenueChart = new ApexCharts(
+  document.querySelector('#yearly-revenue-chart'),
+  yearlyRevenueChartOptions
+);
+yearlyRevenueChart.render();
+
+
+// Pie chart
+const pieChartOptions = {
+  series: [11, 18, 19, 10, 27, 15],
+  labels: ['Superior Suite', 'Superior with Balcony', 'Superior with Panoramic Window', 'Superior Room', 'Junior Suite', 'Comfort Double/Twin Room'],
+  chart: {
+    type: 'pie',
+    background: 'transparent',
+    height: 400,
+  },
+  colors: ['#63701b', '#50ddf6', '#82fa88', '#670303', '#583cb3', '#cc33ff'],
+  legend: {
+    labels: {
+      colors: '#000000',
+    },
+    position: 'bottom',
+  },
+  tooltip: {
+    shared: true,
+    intersect: false,
+    theme: 'dark',
+  },
+};
+
+const pieChart = new ApexCharts(
+  document.querySelector('#booking-ratio-chart'),
+  pieChartOptions
+);
+pieChart.render();

@@ -4,7 +4,24 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Customers</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
 
+        table, th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+            color: black; /* Thêm này để chữ trong bảng màu đen */
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -16,10 +33,20 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="../../static/styleadmin.css">
+    <style>
+        @media screen and (max-width: 576px) {
+            /* Adjustments for small screens */
+            .header-left {
+                margin-left: 20px; /* Add some margin to separate menu icon and search input */
+            }
+            .header-right {
+                margin-right: 20px; /* Add some margin to align account button */
+            }
+        }
+    </style>
 </head>
 <body>
 <div class="grid-container">
-
     <!-- Header -->
     <header class="header">
         <div class="menu-icon" onclick="openSidebar()">
@@ -128,57 +155,175 @@
         <div class="list-customer">
             <h1>List of Customers</h1>
             <table class="table" id="customerTable">
+            <div class="row">
                 <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Status</th>
-                    <th>Login Time</th>
-                    <th>Logout Time</th>
-                    <th>Details</th>
+                    <div class="col">
+                        <th>ID</th>
+                    </div>
+                    <div class="col">
+                        <th>Name</th>
+                    </div>
+                    <div class="col">
+                        <th>Status</th>
+                    </div>
+                    <div class="col">
+                        <th>Login Time</th>
+                    </div>
+                    <div class="col">
+                        <th>Logout Time</th>
+                    </div>
+                    <div class="col">
+                        <th>Details</th>
+                    </div>
                 </tr>
                 </thead>
+            </div>
                 <tbody>
-                <tr>
-                    <td>01</td>
-                    <td>Minh</td>
-                    <td>Member</td>
-                    <td>1:00 AM</td>
-                    <td>2:00 AM</td>
-                    <td><button>View</button></td>
-                </tr>
-                <tr>
-                    <td>02</td>
-                    <td>Trung</td>
-                    <td>Member</td>
-                    <td>1:00 AM</td>
-                    <td>2:00 AM</td>
-                    <td><button>View</button></td>
-                </tr>
-                <tr>
-                    <td>03</td>
-                    <td>Tran Duy Anh</td>
-                    <td>Member</td>
-                    <td>1:00 AM</td>
-                    <td>2:00 AM</td>
-                    <td><button>View</button></td>
-                </tr>
-                <tr>
-                    <td>04</td>
-                    <td>Bui Minh Huan</td>
-                    <td>Huan</td>
-                    <td>1:00 AM</td>
-                    <td>2:00 AM</td>
-                    <td><button>View</button></td>
-                </tr>
-                <tr>
-                    <td>05</td>
-                    <td>Nguyen Quang Manhbeo</td>
-                    <td>Member</td>
-                    <td>1:00 AM</td>
-                    <td>2:00 AM</td>
-                    <td><button>View</button></td>
-                </tr>
+                    <tr>
+                        <td>01</td>
+                        <td>Nguyen Quoc Hung</td>
+                        <td>Member</td>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td><button class="view-btn" onclick="toggleDropdown(this)">View</button>
+                            <div class="dropdown-content hidden">
+                                <p><strong>Room:</strong> Superior Suite</p>
+                                <p><strong>Number of Guests:</strong> 2</p>
+                                <p><strong>Room Type:</strong> Deluxe</p>
+                                <p><strong>Check-in Date:</strong> 2024-05-01</p>
+                                <p><strong>Check-out Date:</strong> 2024-05-05</p>
+                                <p><strong>Booking Time:</strong> 2024-04-25 10:00 AM</p>
+                                <p><strong>City:</strong> Birmingham</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>02</td>
+                        <td>Cham</td>
+                        <td>Member</td>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td><button class="view-btn" onclick="toggleDropdown(this)">View</button>
+                            <div class="dropdown-content hidden">
+                                <p><strong>Room:</strong> Superior Suite</p>
+                                <p><strong>Number of Guests:</strong> 2</p>
+                                <p><strong>Room Type:</strong> Deluxe</p>
+                                <p><strong>Check-in Date:</strong> 2024-05-01</p>
+                                <p><strong>Check-out Date:</strong> 2024-05-05</p>
+                                <p><strong>Booking Time:</strong> 2024-04-25 10:00 AM</p>
+                                <p><strong>City:</strong> Belfast</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>03</td>
+                        <td>Minh</td>
+                        <td>Member</td>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td><button class="view-btn" onclick="toggleDropdown(this)">View</button>
+                            <div class="dropdown-content hidden">
+                                <p><strong>Room:</strong> Superior Suite</p>
+                                <p><strong>Number of Guests:</strong> 2</p>
+                                <p><strong>Room Type:</strong> Deluxe</p>
+                                <p><strong>Check-in Date:</strong> 2024-05-01</p>
+                                <p><strong>Check-out Date:</strong> 2024-05-05</p>
+                                <p><strong>Booking Time:</strong> 2024-04-25 10:00 AM</p>
+                                <p><strong>City:</strong> Aberdeen</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>04</td>
+                        <td>Bui Vu Nhat Minh</td>
+                        <td>Member</td>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td><button class="view-btn" onclick="toggleDropdown(this)">View</button>
+                            <div class="dropdown-content hidden">
+                                <p><strong>Room:</strong> Comfort double/Twin room</p>
+                                <p><strong>Number of Guests:</strong> 2</p>
+                                <p><strong>Room Type:</strong> Deluxe</p>
+                                <p><strong>Check-in Date:</strong> 2024-05-01</p>
+                                <p><strong>Check-out Date:</strong> 2024-05-05</p>
+                                <p><strong>Booking Time:</strong> 2024-04-25 10:00 AM</p>
+                                <p><strong>City:</strong> Edinburgh</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>05</td>
+                        <td>Nguyen Quang Manh</td>
+                        <td>Member</td>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td><button class="view-btn" onclick="toggleDropdown(this)">View</button>
+                            <div class="dropdown-content hidden">
+                                <p><strong>Room:</strong> Junior suite</p>
+                                <p><strong>Number of Guests:</strong> 2</p>
+                                <p><strong>Room Type:</strong> Deluxe</p>
+                                <p><strong>Check-in Date:</strong> 2024-05-01</p>
+                                <p><strong>Check-out Date:</strong> 2024-05-05</p>
+                                <p><strong>Booking Time:</strong> 2024-04-25 10:00 AM</p>
+                                <p><strong>City:</strong> Bristol</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>06</td>
+                        <td>Nguyen Nhat Minh</td>
+                        <td>Member</td>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td><button class="view-btn" onclick="toggleDropdown(this)">View</button>
+                            <div class="dropdown-content hidden">
+                                <p><strong>Room:</strong> Superior room	</p>
+                                <p><strong>Number of Guests:</strong> 2</p>
+                                <p><strong>Room Type:</strong> Deluxe</p>
+                                <p><strong>Check-in Date:</strong> 2024-05-01</p>
+                                <p><strong>Check-out Date:</strong> 2024-05-05</p>
+                                <p><strong>Booking Time:</strong> 2024-04-25 10:00 AM</p>
+                                <p><strong>City:</strong> Glasgow</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>07</td>
+                        <td>Phan Tan Trung</td>
+                        <td>Member</td>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td><button class="view-btn" onclick="toggleDropdown(this)">View</button>
+                            <div class="dropdown-content hidden">
+                                <p><strong>Room:</strong> Superior with panoramic window</p>
+                                <p><strong>Number of Guests:</strong> 2</p>
+                                <p><strong>Room Type:</strong> Deluxe</p>
+                                <p><strong>Check-in Date:</strong> 2024-05-01</p>
+                                <p><strong>Check-out Date:</strong> 2024-05-05</p>
+                                <p><strong>Booking Time:</strong> 2024-04-25 10:00 AM</p>
+                                <p><strong>City:</strong> London</p>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>08</td>
+                        <td>Bui Minh Huan</td>
+                        <td>Member</td>
+                        <td>1:00 AM</td>
+                        <td>2:00 AM</td>
+                        <td><button class="view-btn" onclick="toggleDropdown(this)">View</button>
+                            <div class="dropdown-content hidden">
+                                <p><strong>Room:</strong> Superior with balcony	</p>
+                                <p><strong>Number of Guests:</strong> 2</p>
+                                <p><strong>Room Type:</strong> Deluxe</p>
+                                <p><strong>Check-in Date:</strong> 2024-05-01</p>
+                                <p><strong>Check-out Date:</strong> 2024-05-05</p>
+                                <p><strong>Booking Time:</strong> 2024-04-25 10:00 AM</p>
+                                <p><strong>City:</strong> Manchester</p>
+                            </div>
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -187,13 +332,7 @@
 
 </div>
 
-<!-- Main -->
-<main class="main-container">
-    <div class="main-title">
-        <h2>BOOKING</h2>
-    </div>
-</main>
-<!-- End Main -->
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz4fnFO9gybBud7TlRbs/ic4AwGcFZOxg5DpPt8EgeUIgIwzjWfXQKWA3" crossorigin="anonymous"></script>
@@ -227,9 +366,15 @@
         }
     }
 
-    // Add event listener to the search input
     document.getElementById("searchInput").addEventListener("keyup", filterCustomers);
+</script>
+<script>
+    function toggleDropdown(button) {
+        var dropdown = button.nextElementSibling;
+        dropdown.classList.toggle('hidden');
+    }
 </script>
 
 </body>
 </html>
+
